@@ -4,6 +4,8 @@ ARG NODE_ENV
 
 ENV NODE_ENV ${NODE_ENV:-development}
 
+EXPOSE 4000
+
 WORKDIR /usr/app
 
 COPY package*.json ./
@@ -14,8 +16,4 @@ RUN yarn global add pm2
 
 COPY . .
 
-EXPOSE 4000
-
 CMD ["./start.js"]
-
-# CMD ["pm2-dev", "start", "ecosystem.config.js"]

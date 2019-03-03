@@ -1,6 +1,7 @@
 require('module-alias/register');
 const express = require('express');
 const expressGraphQL = require('express-graphql');
+const Chalk = require('chalk');
 
 const schema = require('@schema');
 
@@ -14,5 +15,5 @@ app.use('/graphql', expressGraphQL({
 }));
 
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+  console.log(`Express-GraphQL server has started on ${Chalk.bold.blue(`http://localhost:${port}/`)}`);
 });

@@ -1,16 +1,17 @@
 {
-  "name": "ellevest-contentful-graphql-api",
+  "name": "ellevest-contentful-graphql-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./src/index.js",
+    "test": "mocha \"./src/**/*.spec.js\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "chalk": "^2.4.2",
     "contentful": "^7.3.0",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
@@ -19,16 +20,19 @@
     "nodemon": "^1.18.9"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0"
+    "eslint-plugin-import": "^2.16.0",
+    "mocha": "^6.0.2",
+    "sinon": "^7.2.6"
   },
   "_moduleAliases": {
     "@api": "./src/api.js",
     "@utils": "./src/utils.js",
     "@formatter": "./src/formatter.js",
     "@types": "./src/types/index.js",
-    "@schema" : "./src/schema/schema.js",
+    "@schema": "./src/schema/schema.js",
     "@queries": "./src/queries/"
   }
 }
