@@ -1,10 +1,8 @@
 const graphql = require('graphql');
 
-const Types = require('@types');
-const api = require('@api');
-const formatter = require('@formatter');
-
-const { serverConsole } = require('@utils')
+const Types = require('../types');
+const api = require('../api');
+const formatter = require('../formatter');
 
 const { ArticleType } = Types;
 const { GraphQLString, GraphQLNonNull } = graphql;

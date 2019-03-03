@@ -2,14 +2,14 @@ module.exports = {
   settings: {
     "import/resolver": {
       alias: {
-        "@schema" : './src/schema/schema.js',
+        "@schema": './src/schema/schema.js',
         "@api": "./src/api.js",
         "@utils": "./src/utils.js",
         "@formatter": "./src/formatter.js",
         "@types": "./src/types/index.js"
       }
     }
-  }
+  },
   env: {
     browser: true,
     commonjs: true,
@@ -24,5 +24,6 @@ module.exports = {
     ecmaVersion: 2018,
   },
   rules: {
-  },
+    "semi": "error",
+  }
 };
