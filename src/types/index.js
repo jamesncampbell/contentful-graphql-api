@@ -1,8 +1,4 @@
-
 const graphql = require('graphql');
-
-const serverConsole = require('../utils').serverObjectDebugger;
-
 
 const {
   GraphQLObjectType,
@@ -10,6 +6,15 @@ const {
   GraphQLBoolean,
   GraphQLList,
 } = graphql;
+
+const ImageType = new GraphQLObjectType({
+  name: 'Image',
+  fields: () => ({
+    id: { type: GraphQLString },
+    url: { type: GraphQLString },
+    title: { type: GraphQLString },
+  }),
+});
 
 const AuthorType = new GraphQLObjectType({
   name: 'Author',
@@ -21,6 +26,7 @@ const AuthorType = new GraphQLObjectType({
     bio: { type: GraphQLString },
     linkedinUrl: { type: GraphQLString },
     twitterHandle: { type: GraphQLString },
+    image: { type: ImageType },
   }),
 });
 
@@ -39,15 +45,6 @@ const TagType = new GraphQLObjectType({
     id: { type: GraphQLString },
     name: { type: GraphQLString },
     slug: { type: GraphQLString },
-  }),
-});
-
-const ImageType = new GraphQLObjectType({
-  name: 'Image',
-  fields: () => ({
-    id: { type: GraphQLString },
-    url: { type: GraphQLString },
-    title: { type: GraphQLString },
   }),
 });
 
@@ -75,51 +72,9 @@ const ArticleType = new GraphQLObjectType({
     categories: { type: new GraphQLList(CategoryType) },
     tags: { type: new GraphQLList(TagType) },
     relatedArticles: { type: new GraphQLList(ArticleType) },
-    heroImage: {
-      type: ImageType,
-      resolve({ heroImage }, args) {
-        if (heroImage) {
-          const { id, file, title } = heroImage;
-          return {
-            id,
-            url: file.url,
-            title,
-          };
-        }
-
-        return null;
-      },
-    },
-    customOpenGraphImage: {
-      type: ImageType,
-      resolve({ customOpenGraphImage }, args) {
-        if (customOpenGraphImage) {
-          const { id, file, title } = customOpenGraphImage;
-          return {
-            id,
-            url: file.url,
-            title,
-          };
-        }
-
-        return null;
-      },
-    },
-    thumbnailImage: {
-      type: ImageType,
-      resolve({ thumbnailImage }, args) {
-        if (thumbnailImage) {
-          const { id, file, title } = thumbnailImage;
-          return {
-            id,
-            url: file.url,
-            title,
-          };
-        }
-
-        return null;
-      },
-    },
+    heroImage: { type: ImageType },
+    customOpenGraphImage: { type: ImageType },
+    thumbnailImage: { type: ImageType },
     thumbnailWithVideo: { type: GraphQLBoolean },
     body: { type: GraphQLString },
     hideGetStartedModule: { type: GraphQLBoolean },
@@ -128,35 +83,11 @@ const ArticleType = new GraphQLObjectType({
     customPageTitle: { type: GraphQLString },
     customCanonicalUrl: { type: GraphQLString },
     customMetaDescription: { type: GraphQLString },
-    customMetaKeywords: {
-      type: GraphQLString,
-      resolve({ customMetaKeywords }, args) {
-        if (customMetaKeywords && customMetaKeywords.length > 0) {
-          return customMetaKeywords.join(', ');
-        }
-
-        return null;
-      },
-    },
+    customMetaKeywords: { type: new GraphQLList(GraphQLString) },
     customOpenGraphTitle: { type: GraphQLString },
     customOpenGraphDescription: { type: GraphQLString },
     customTwitterCardTitle: { type: GraphQLString },
-    customTwitterCardImage: {
-      type: ImageType,
-      resolve({ customTwitterCardImage }, args) {
-        if (customTwitterCardImage) {
-          const { id, file, title } = customTwitterCardImage;
-
-          return {
-            id,
-            url: file.url,
-            title,
-          };
-        }
-
-        return null;
-      },
-    },
+    customTwitterCardImage: { type: ImageType },
   }),
 });
 

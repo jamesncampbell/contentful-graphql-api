@@ -15,11 +15,20 @@
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "graphql": "^14.0.2",
+    "module-alias": "^2.2.0",
     "nodemon": "^1.18.9"
   },
   "devDependencies": {
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0"
+  },
+  "_moduleAliases": {
+    "@api": "./src/api.js",
+    "@utils": "./src/utils.js",
+    "@formatter": "./src/formatter.js",
+    "@types": "./src/types/index.js",
+    "@schema" : "./src/schema/schema.js",
+    "@queries": "./src/queries/"
   }
 }

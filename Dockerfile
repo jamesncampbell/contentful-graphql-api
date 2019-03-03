@@ -1,18 +1,21 @@
 FROM node:8.13.0
 
-WORKDIR /usr/src/app
+ARG NODE_ENV
+
+ENV NODE_ENV ${NODE_ENV:-development}
+
+WORKDIR /usr/app
 
 COPY package*.json ./
 
 RUN yarn install
 
+RUN yarn global add pm2
+
 COPY . .
 
 EXPOSE 4000
 
-# ENV TINI_VERSION v0.18.0
-# ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-# RUN chmod +x /tini
-# ENTRYPOINT ["/tini", "--"]
+CMD ["./start.js"]
 
-CMD ["./node_modules/.bin/nodemon", "index.js"]
+# CMD ["pm2-dev", "start", "ecosystem.config.js"]

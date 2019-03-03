@@ -1,11 +1,11 @@
 const graphql = require('graphql');
-const fetchPage = require('../fetchers/fetchPage');
-const Types = require('../types');
+
+const fetch = require('@api');
+const Types = require('@types');
+
 
 const { PageType } = Types;
 const { GraphQLString, GraphQLNonNull } = graphql;
-
-const serverConsole = require('../utils').serverObjectDebugger;
 
 module.exports = {
   type: PageType,
@@ -13,7 +13,7 @@ module.exports = {
     id: { type: new GraphQLNonNull(GraphQLString) },
   },
   resolve(parentValue, args) {
-    return fetchPage.getEntry(`${args.id}`, { include: 4 })
+    return fetch.getEntry(`${args.id}`, { include: 5 })
       .then(((res) => {
         const { fields, sys } = res;
 
@@ -23,10 +23,6 @@ module.exports = {
             layout = item.fields.type;
           } else {
             ({ layout } = item.fields);
-          }
-
-          if (item.fields.slug === 'magazine-home-filtered-article-list') {
-            serverConsole('item', item);
           }
 
           const module = {
@@ -52,10 +48,8 @@ module.exports = {
                     excerpt: curatedSpaceArticle.fields.article.fields.excerpt,
                     categories: curatedSpaceArticle.fields.article.fields.categories && curatedSpaceArticle.fields.article.fields.categories.reduce((catAcc, category) => {
                       const cat = {
-                        id: category.sys.id,
-                        slug: category.fields.slug,
-                        name: category.fields.name,
-                        description: category.fields.description,
+                        slug: category.fields && category.fields.slug,
+                        name: category.fields && category.fields.name,
                       };
                       catAcc.push(cat);
                       return catAcc;

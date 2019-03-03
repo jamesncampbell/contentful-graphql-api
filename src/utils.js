@@ -1,11 +1,7 @@
 const util = require('util');
 
-const serverObjectDebugger = (outputMessage, object) => (
+module.exports.verboseConsole = (outputMessage, object) => (
   console.warn(outputMessage, util.inspect(object, {
     showHidden: false, depth: null, colors: true, maxArrayLength: null,
   }))
 );
-
-module.exports = {
-  serverObjectDebugger,
-};

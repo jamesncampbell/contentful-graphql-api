@@ -1,6 +1,9 @@
+require('module-alias/register');
 const express = require('express');
 const expressGraphQL = require('express-graphql');
-const schema = require('./schema/schema');
+
+const schema = require('@schema');
+
 
 const app = express();
 const port = 3000;

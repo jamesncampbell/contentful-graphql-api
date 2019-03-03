@@ -5,5 +5,4 @@ const client = contentful.createClient({
   accessToken: 'ba12d981a8163174e2c11898e5ae65041433f2914e69d6ff59d95afa7578436c',
 });
 
-
 module.exports = client;
