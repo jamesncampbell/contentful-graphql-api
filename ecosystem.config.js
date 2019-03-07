@@ -1,12 +1,12 @@
 module.exports = {
   apps: [{
-    name: "graphql-server",
-    script: "./src/index.js",
+    name: 'graphql-server',
+    script: './src/index.js',
     env: {
-      NODE_ENV: "development",
+      NODE_ENV: 'development',
     },
     env_production: {
-      NODE_ENV: "production",
+      NODE_ENV: 'production',
     },
-  }]
-}
+  }],
+};

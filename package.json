@@ -1,5 +1,5 @@
 {
-  "name": "ellevest-contentful-graphql-api",
+  "name": "ellevest-contentful-graphql-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
